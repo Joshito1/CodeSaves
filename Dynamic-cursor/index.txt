@@ -1,0 +1,59 @@
+CSS
+
+/* CSS for the dynamic cursor */
+.dynamic-cursor {
+    position: fixed;
+    width: 24px;
+    /* Adjust size as needed */
+    height: 24px;
+    /* Adjust size as needed */
+    background-color: transparent;
+    border: 2px solid #fff;
+    /* Cursor border color */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s ease;
+}
+
+.dynamic-cursor.active {
+    transform: scale(1.5);
+    /* Adjust scale as needed */
+    background-color: rgba(255, 255, 255, 0.5);
+    /* Adjust background color as needed */
+    border-color: rgba(255, 255, 255, 0.5);
+    /* Adjust border color as needed */
+}
+
+/* Additional styles for different cursor states (e.g., hover, pointer, etc.) */
+
+
+
+JS
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Create cursor element
+    var cursor = document.createElement('div');
+    cursor.classList.add('dynamic-cursor');
+    document.body.appendChild(cursor);
+
+    // Update cursor position
+    document.addEventListener('mousemove', function (e) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    // Add active class to cursor on mouseenter
+    document.querySelectorAll('.hoverable-element').forEach(function (element) {
+        element.addEventListener('mouseenter', function () {
+            cursor.classList.add('active');
+        });
+    });
+
+    // Remove active class from cursor on mouseleave
+    document.querySelectorAll('.hoverable-element').forEach(function (element) {
+        element.addEventListener('mouseleave', function () {
+            cursor.classList.remove('active');
+        });
+    });
+});
